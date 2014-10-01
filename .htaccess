@@ -1,0 +1,8 @@
+Options Indexes FollowSymLinks
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^([A-Za-z0-9-]+)/?$ $1.php
+ErrorDocument 404 /404.php
