@@ -45,6 +45,14 @@ h2, h3, th, td{font-family:Helvetica, serif}
 		height: 200px;
 		margin-top: -300px;
 		margin-right: -500px; } 
+		
+ #top1 { position: absolute;
+		left: 17%;
+		top: 50%;
+		width: 350px;
+		height: 200px;
+		margin-top: -300px;
+		margin-right: -500px; }		
   </style>";
 
 $conexion = mysql_connect("localhost", "root", "") or die ("fallo conexion");
@@ -65,7 +73,7 @@ document.location=('consulta_depto.php');
 else
 {
 	
-$query = "SELECT DISTINCT nombre_trabajador, ficha, departamento, area, numero_departamento, totales FROM reporte WHERE departamento= '".$departamento."' ";
+$query = "SELECT DISTINCT nombre_trabajador, ficha, departamento, area, numero_departamento, totales, totales_herramientas FROM reporte WHERE departamento= '".$departamento."' ";
 $result = mysql_query($query) or die("Error en la instruccion SQL");
 
 while($row=mysql_fetch_array($result))  
@@ -90,42 +98,47 @@ echo "</tr>";
 echo "</table> ";
 
 echo"<br>";
+
 $sql=mysql_query("SELECT SUM(TRUNCATE(total_herramienta,2)) FROM reporte WHERE departamento='".$departamento."' ");
+
 @$resultado=mysql_result($sql, 0);
 
+
 echo "<table border = '2' bordercolor=\"#0099FF\" width=1200 align=\"center\">";
+
 echo "<tr>";
 echo "<th bgcolor=\"#afd5f4\" width=171 align=\"center\"><b>TOTAL DE HERRAMIENTA DE TRABAJADOR</b></th>";
-
+echo "<th bgcolor=\"#afd5f4\" width=171 align=\"center\"><b>TOTAL DE HERRAMIENTA EN PIEZAS</b></th>";
 echo "</tr>";
 
 echo "<tr>";
 echo "<td bgcolor=\"#FFFFFF\" width=160 align=\"center\">".$row["totales"]."</td>";
-
+echo "<td bgcolor=\"#FFFFFF\" width=160 align=\"center\">".$row["totales_herramientas"]."</td>";
 echo "</tr>";
+@$total_por_depto=$total_por_depto + $row["totales_herramientas"];
 echo "</table> ";
 
 
 echo"<br>";
 echo"<br>";
 
-
-
 }
 } 
 
 $resultado1= $resultado;
-$sql3="UPDATE totales SET  totales_depto='".$resultado1."' WHERE departamento = '".$departamento."' ";
-//$sql3= "INSERT INTO totales(totales_depto, departamento) value('".$resultado1."', '".$departamento."')";
+$resultado3= $total_por_depto;
+
+$sql3="UPDATE totales SET  totales_depto='".$resultado1."', totales_herramientas='".$resultado3."' WHERE departamento = '".$departamento."' ";
+
 mysql_query($sql3,$conexion);
 
 echo"<br>";
 
-echo "<div id=\"top\" align=\"right\" >";
+echo "<div id=\"top1\" align=\"left\" >";
 echo "<table border = '2' bordercolor=\"#0099FF\" width=350>";
 
 echo "<tr>";
-echo "<th bgcolor=\"#3ca4e6\" width=171 align=\"center\"><b>TOTAL DE DEPARTAMENTO</b></th>";
+echo "<th bgcolor=\"#3ca4e6\" width=171 align=\"center\"><b>TOTAL DE DEPARTAMENTO $$$</b></th>";
 echo "</tr>";
 
 echo "<tr>";
@@ -134,8 +147,23 @@ echo "</tr>";
 
 echo "</table> ";
 echo "</div>";
-//echo $resultado1;
 
+
+echo "<div id=\"top\" align=\"right\" >";
+echo "<table border = '2' bordercolor=\"#0099FF\" width=350>";
+
+echo "<tr>";
+echo "<th bgcolor=\"#3ca4e6\" width=171 align=\"center\"><b>TOTAL DE HERRAMIENTA POR PIEZAS</b></th>";
+echo "</tr>";
+
+echo "<tr>";
+echo "<td bgcolor=\"#FFFFFF\" width=160 align=\"center\"><b>$total_por_depto<b></td>";
+echo "</tr>";
+
+echo "</table> ";
+echo "</div>";
+
+//echo $total_por_depto;
 } 
 else 
 { 

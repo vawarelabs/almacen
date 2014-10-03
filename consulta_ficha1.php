@@ -38,7 +38,6 @@ h2, h3, th, td{font-family:Helvetica, serif}
 $conexion = mysql_connect("localhost", "root", "") or die ("fallo conexion");
 mysql_select_db("almacen", $conexion);
 
-//$ficha= $_POST["ficha"];
 $idficha= $_GET["ficha"]; 
 $idficha=base64_decode($idficha);
 
@@ -55,7 +54,7 @@ document.location=('consulta_ficha.php');
 else
 {
 	
-$query = "SELECT * FROM reporte WHERE ficha= '".$idficha."'";
+$query = "SELECT * FROM trabajador WHERE ficha= '".$idficha."'";
 $result = mysql_query($query) or die("Error en la instruccion SQL");
 $row1 = mysql_fetch_array($result);
 
@@ -101,8 +100,10 @@ while ($row = mysql_fetch_array($result2)){
 echo "<tr>";
 
 $sql2=mysql_query("SELECT SUM(TRUNCATE(total_herramienta,2)) FROM reporte WHERE ficha='".$idficha."' ");
+$sql4=mysql_query("SELECT SUM(TRUNCATE(solicitud1,0)) FROM reporte WHERE ficha='".$idficha."' ");
 
 $resultado=mysql_result($sql2, 0);
+$resultado2=mysql_result($sql4, 0);
 
 echo "<td bgcolor=\"#FFFFFF\" align=\"center\"><a target='_blank' href='mod_herramientas.php? idficha=".base64_encode(@$row['id_ficha'])."'> <img src=\"images/editar.png\"</a></td>";
 echo "<td bgcolor=\"#FFFFFF\" width=160 align=\"center\">".$row["referencia_sap"]."</td> ";
@@ -119,15 +120,16 @@ echo "</tr>";
 
 }
 echo "<tr>";
-echo "<td bgcolor=\"#FFFFFF\" width=150 align=\"center\" colspan=\"11\"><b>TOTAL DE HERRAMIENTAS $ $resultado PESOS</b></td> ";
+echo "<td bgcolor=\"#FFFFFF\" width=150 align=\"center\" colspan=\"5\"><b>TOTAL DE HERRAMIENTAS $ $resultado PESOS </b></td> ";
+echo "<td bgcolor=\"#FFFFFF\" width=150 align=\"center\" colspan=\"6\"><b>TIENE BAJO SU RESGUARDO $resultado2 DE HERRAMIENTA</b></td> ";
 echo "</tr>";
 echo "</table> ";
 echo "</table>";
+$resultado3=$resultado2;
 $resultado1=$resultado;
-$sql3="UPDATE reporte SET totales='".$resultado1."' WHERE ficha = '".$idficha."' ";
+$sql3="UPDATE reporte SET totales='".$resultado1."', totales_herramientas='".$resultado3."' WHERE ficha = '".$idficha."' ";
 mysql_query($sql3,$conexion);
 }
-
 
 } 
 else 

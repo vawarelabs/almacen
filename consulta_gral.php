@@ -40,12 +40,13 @@ mysql_select_db("almacen",$conexion) or die("Problemas en la selección de la ba
 
 echo "<table border = '2' bordercolor=\"#0099FF\" width=600 align=\"center\">";
 echo "<tr> ";
-echo "<th bgcolor=\"#00CCFF\" width=359 align=\"center\"><b>DEPARTAMENTO</b></th>";
-echo "<th bgcolor=\"#00CCFF\" width=240 align=\"center\"><b>TOTAL</b></th>";
+echo "<th bgcolor=\"#00CCFF\" width=225 align=\"center\"><b>DEPARTAMENTO</b></th>";
+echo "<th bgcolor=\"#00CCFF\" width=150 align=\"center\"><b>TOTAL EN DINERO</b></th>";
+echo "<th bgcolor=\"#00CCFF\" width=150 align=\"center\"><b>TOTAL DE HERRAMIENTA</b></th>";
 echo "</tr>";
 echo "</table>";
 
-$registros=mysql_query("SELECT DISTINCT departamento, totales_depto FROM totales ORDER BY departamento ASC ",$conexion) or die("Problemas en el select:".mysql_error());
+$registros=mysql_query("SELECT DISTINCT departamento, totales_depto, totales_herramientas FROM totales ORDER BY departamento ASC ",$conexion) or die("Problemas en el select:".mysql_error());
 
 while ($row=mysql_fetch_array($registros))
 {
@@ -55,6 +56,7 @@ echo "<table border = '2' bordercolor=\"#0099FF\" width=600 align=\"center\">";
 echo "<tr>";
 echo "<td bgcolor=\"#FFFFFF\" width=240 align=\"center\">".$row["departamento"]."</td> ";
 echo "<td bgcolor=\"#FFFFFF\" width=160 align=\"center\">".$row["totales_depto"]."</td>" ;
+echo "<td bgcolor=\"#FFFFFF\" width=160 align=\"center\">".$row["totales_herramientas"]."</td>" ;
 echo "</tr>";
 
 echo "</table>";

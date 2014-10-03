@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-10-2014 a las 17:42:26
+-- Tiempo de generación: 03-10-2014 a las 20:16:48
 -- Versión del servidor: 5.6.16
 -- Versión de PHP: 5.5.11
 
@@ -774,7 +774,7 @@ INSERT INTO `login` (`idusuario`, `usuario`, `password`) VALUES
 --
 -- Estructura de tabla para la tabla `reporte`
 --
--- Creación: 30-09-2014 a las 15:19:50
+-- Creación: 03-10-2014 a las 15:25:12
 --
 
 CREATE TABLE IF NOT EXISTS `reporte` (
@@ -796,52 +796,43 @@ CREATE TABLE IF NOT EXISTS `reporte` (
   `tipo_cambio` int(10) NOT NULL,
   `total_herramienta` varchar(20) NOT NULL,
   `totales` varchar(20) NOT NULL,
-  `totales_depto` varchar(20) NOT NULL,
+  `totales_herramientas` varchar(20) NOT NULL,
   `totales_gral` varchar(20) NOT NULL,
   PRIMARY KEY (`id_ficha`),
   KEY `fecha` (`ficha`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `totales`
 --
--- Creación: 29-09-2014 a las 21:29:50
+-- Creación: 03-10-2014 a las 16:45:47
 --
 
 CREATE TABLE IF NOT EXISTS `totales` (
   `totales_depto` varchar(20) NOT NULL,
+  `totales_herramientas` varchar(20) NOT NULL,
   `departamento` varchar(50) NOT NULL,
   `id_totales` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id_totales`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Volcado de datos para la tabla `totales`
 --
 
-INSERT INTO `totales` (`totales_depto`, `departamento`, `id_totales`) VALUES
-('', 'Gestion Integral y Planeacion', 7),
-('', 'Control Salmuera', 8),
-('', 'Control Calidad', 9),
-('', 'Investigacion y Desarrollo', 10),
-('', 'Sal de Mesa', 11),
-('', 'Ingenieria y Construccion', 12),
-('', 'Mantenimiento Transporte Terrestre', 13),
-('', 'Torno y Soldadura', 14),
-('', 'Equipo Pesado', 15),
-('', 'Comunidad y Servicio', 16),
-('', 'Gestion Integral y Planeacion', 17),
-('', 'Control Salmuera', 18),
-('', 'Control Calidad', 19),
-('', 'Investigacion y Desarrollo', 20),
-('', 'Sal de Mesa', 21),
-('', 'Ingenieria y Construccion', 22),
-('', 'Mantenimiento Transporte Terrestre', 23),
-('', 'Torno y Soldadura', 24),
-('', 'Equipo Pesado', 25),
-('', 'Comunidad y Servicio', 26);
+INSERT INTO `totales` (`totales_depto`, `totales_herramientas`, `departamento`, `id_totales`) VALUES
+('', '', 'Gestion Integral y Planeacion', 7),
+('', '', 'Control Salmuera', 8),
+('', '', 'Control Calidad', 9),
+('', '', 'Investigacion y Desarrollo', 10),
+('', '', 'Sal de Mesa', 11),
+('', '', 'Ingenieria y Construccion', 12),
+('', '', 'Mantenimiento Transporte Terrestre', 13),
+('', '', 'Torno y Soldadura', 14),
+('', '', 'Equipo Pesado', 15),
+('', '', 'Comunidad y Servicio', 16);
 
 -- --------------------------------------------------------
 
@@ -859,7 +850,7 @@ CREATE TABLE IF NOT EXISTS `trabajador` (
   `area` varchar(50) NOT NULL,
   `numero_departamento` int(10) NOT NULL,
   PRIMARY KEY (`id_ficha`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

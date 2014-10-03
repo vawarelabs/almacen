@@ -278,6 +278,9 @@ document.getElementById('total_herramienta').value=r;
 
  <label>CANTIDAD SOLICITADA</label>
   <input type="text" name="solicitud1" id="solicitud1" value="<?php echo $row['solicitud1'];?>"/>
+  <br>
+  <br>
+  <input type="submit" name="multiplica" id="multiplica" onClick="multiplicacion()"/>
 
    <label>TOTAL DE HERRAMIENTA</label>
   <input type="text" name="total_herramienta" id="total_herramienta" value="<?php echo $row['total_herramienta'];?>"/>
