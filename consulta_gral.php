@@ -58,10 +58,22 @@ echo "<td bgcolor=\"#FFFFFF\" width=240 align=\"center\">".$row["departamento"].
 echo "<td bgcolor=\"#FFFFFF\" width=160 align=\"center\">".$row["totales_depto"]."</td>" ;
 echo "<td bgcolor=\"#FFFFFF\" width=160 align=\"center\">".$row["totales_herramientas"]."</td>" ;
 echo "</tr>";
-
 echo "</table>";
 }
 
+$sql_1=mysql_query("SELECT SUM(TRUNCATE(totales_depto,2)) FROM totales");
+@$resultado_1=mysql_result($sql_1, 0);
+
+$sql_2=mysql_query("SELECT SUM(TRUNCATE(totales_herramientas,0)) FROM totales");
+@$resultado_2=mysql_result($sql_2, 0);
+
+echo "<table border = '2' bordercolor=\"#0099FF\" width=600 align=\"center\">";
+echo "<tr>";
+echo "<th bgcolor=\"#00CCFF\" width=225 align=\"center\"><b>TOTALES</b></th>";
+echo "<th bgcolor=\"#00CCFF\" width=150 align=\"center\"><b>$ $resultado_1</b></th>";
+echo "<th bgcolor=\"#00CCFF\" width=150 align=\"center\"><b>$resultado_2</b></th>";
+echo "</tr>";
+echo "</table>";
 }
 else 
 { 
